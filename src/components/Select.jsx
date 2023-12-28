@@ -1,13 +1,11 @@
 import React from 'react';
 
 const SelectNumber = ({ numberSelected, setNumberSelected, setSelectNumber }) => {
-  let value = 0;
 
   const editInput = e => {
-    value = e.target.value.replace(/[^0-9]/gi, '');
-    if (value > 20) {value = ''}
+    const value = e.target.value.replace(/[^0-9]/gi, '');
+    if (value > 20) return
     setNumberSelected(value);
-    //setSelectNumber(true)
   };
 
   const doneClicked = e => {
@@ -16,7 +14,7 @@ const SelectNumber = ({ numberSelected, setNumberSelected, setSelectNumber }) =>
 
   return (
     <>
-      <div className="selected">
+      <div className="inputdev">
         <input
           required
           name="value"
@@ -26,9 +24,9 @@ const SelectNumber = ({ numberSelected, setNumberSelected, setSelectNumber }) =>
           maxLength="2"
           onChange={editInput}
         />
-        <button onClick={() => doneClicked()}>Done</button>
+        <button className="done" onClick={() => doneClicked()}>Done</button>
       </div>
-      <p>Enter a number betwen 1 and 20.</p>
+      <p>(Enter a number betwen 1 and 20.)</p>
     </>
   );
 };

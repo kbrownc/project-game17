@@ -4,12 +4,17 @@ import Board from './Board';
 
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
-  const [numberSelected, setNumberSelected] = useState(null);
-  const squares = [1, 2, 3];
+  const [numberSelected, setNumberSelected] = useState('');
+  const squares = [1, 2, 3,4,5,6,7,8,9,10,11,12];
 
-  const restart = () => {};
+  const restart = () => {
+    setSelectNumber(false);
+    setNumberSelected('');
+  };
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.log('handleClick')
+  };
 
   return (
     <>
@@ -21,7 +26,7 @@ function App() {
         <Board squares={squares} onClick={handleClick} />
       )}
       <div className="info-wrapper">
-        <button onClick={() => restart()}>Restart</button>
+        <button className="restart" onClick={() => restart()}>Restart</button>
         <div>{numberSelected}</div>
       </div>
     </>

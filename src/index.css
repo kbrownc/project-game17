@@ -1,8 +1,35 @@
 body {
-  background-color: black;
+  background-color: grey;
   color: white;
-  font-family: "Roboto", sans-serif;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
+}
+.restart {
+  width: 65px;
+  height: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: red;
+  border: none;
+}
+.inputdev {
+  display: flex;
+   border: black;
+}
+.done {
+  display: flex;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 10px;
+  color: white;
+  background-color: red;
+}
+.selected {
+  display: flex;
+  width: 25px;
+  height: 20px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
 }
