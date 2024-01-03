@@ -5,11 +5,13 @@ import Board from './Board';
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
   const [numberSelected, setNumberSelected] = useState('');
-  const squares = [1, 2, 3,4,5,6,7,8,9,10,11,12];
+  const [squares, setSquares] = useState([1, 2, 3,4,5,6,7,8,9,10,11,12]);
+  const [wordLengths, setWordLengths] = useState([]);
 
   const restart = () => {
     setSelectNumber(false);
     setNumberSelected('');
+    setWordLengths([]);
   };
 
   const handleClick = () => {
@@ -21,13 +23,13 @@ function App() {
       <h1>Game17</h1>
       {!selectNumber ? (
         <SelectNumber numberSelected={numberSelected} setNumberSelected={setNumberSelected}
-        setSelectNumber={setSelectNumber} />
+        setSelectNumber={setSelectNumber} wordLengths={wordLengths} setWordLengths={setWordLengths} />
       ) : (
         <Board squares={squares} onClick={handleClick} />
       )}
       <div className="info-wrapper">
         <button className="restart" onClick={() => restart()}>Restart</button>
-        <div>{numberSelected}</div>
+        <div>{numberSelected} {wordLengths}</div>
       </div>
     </>
   );

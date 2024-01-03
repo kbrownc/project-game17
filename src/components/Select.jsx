@@ -1,15 +1,34 @@
+//import React from 'react';
 import React from 'react';
 
-const SelectNumber = ({ numberSelected, setNumberSelected, setSelectNumber }) => {
+const SelectNumber = ({
+  numberSelected,
+  setNumberSelected,
+  setSelectNumber,
+  wordLengths,
+  setWordLengths,
+}) => {
+
+  const lengthList = [2,3,4,5];
 
   const editInput = e => {
     const value = e.target.value.replace(/[^0-9]/gi, '');
-    if (value > 20) return
+    if (value > 20) return;
     setNumberSelected(value);
   };
 
+  function handleCheckboxChange(lth) {
+    let newWordLengths = [...wordLengths]
+    if (wordLengths.filter(item => item === lth).length > 0) {
+      newWordLengths = wordLengths.filter(item => item !== lth)
+    } else {
+      newWordLengths.push(lth)
+    }
+    setWordLengths(newWordLengths)
+  }
+
   const doneClicked = e => {
-    setSelectNumber(true)
+    setSelectNumber(true);
   };
 
   return (
@@ -24,9 +43,30 @@ const SelectNumber = ({ numberSelected, setNumberSelected, setSelectNumber }) =>
           maxLength="2"
           onChange={editInput}
         />
-        <button className="done" onClick={() => doneClicked()}>Done</button>
+        <button className="done" onClick={() => doneClicked()}>
+          Done
+        </button>
       </div>
-      <p>(Enter a number betwen 1 and 20.)</p>
+      <div>
+          <form>
+            {lengthList.map(lth => (
+              <div key={lth}>
+                <input
+                  type="checkbox"
+                  name="select"
+                  key="{lth}"
+                  checked={ wordLengths.filter(item => item === lth).length > 0 ? 'checked' : ''}
+                  value={lengthList.filter(item => item === lth) }
+                  onChange={() => handleCheckboxChange(lth)}
+                />
+                <label className="modal-label">
+                  {lth + ' letter word'}
+                </label>
+              </div>
+            ))}
+          </form>
+        </div>
+      <p>(Enter a number betwen 1 and 20 and select the word sizes you want.)</p>
     </>
   );
 };
