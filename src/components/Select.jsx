@@ -8,8 +8,7 @@ const SelectNumber = ({
   wordLengths,
   setWordLengths,
 }) => {
-
-  const lengthList = [2,3,4,5];
+  const lengthList = [2, 3, 4, 5];
 
   const editInput = e => {
     const value = e.target.value.replace(/[^0-9]/gi, '');
@@ -18,13 +17,13 @@ const SelectNumber = ({
   };
 
   function handleCheckboxChange(lth) {
-    let newWordLengths = [...wordLengths]
+    let newWordLengths = [...wordLengths];
     if (wordLengths.filter(item => item === lth).length > 0) {
-      newWordLengths = wordLengths.filter(item => item !== lth)
+      newWordLengths = wordLengths.filter(item => item !== lth);
     } else {
-      newWordLengths.push(lth)
+      newWordLengths.push(lth);
     }
-    setWordLengths(newWordLengths)
+    setWordLengths(newWordLengths);
   }
 
   const doneClicked = e => {
@@ -48,24 +47,22 @@ const SelectNumber = ({
         </button>
       </div>
       <div>
-          <form>
-            {lengthList.map(lth => (
-              <div key={lth}>
-                <input
-                  type="checkbox"
-                  name="select"
-                  key="{lth}"
-                  checked={ wordLengths.filter(item => item === lth).length > 0 ? 'checked' : ''}
-                  value={lengthList.filter(item => item === lth) }
-                  onChange={() => handleCheckboxChange(lth)}
-                />
-                <label className="modal-label">
-                  {lth + ' letter word'}
-                </label>
-              </div>
-            ))}
-          </form>
-        </div>
+        <form>
+          {lengthList.map(lth => (
+            <div key={lth}>
+              <input
+                type="checkbox"
+                name="select"
+                key="{lth}"
+                checked={wordLengths.filter(item => item === lth).length > 0 ? 'checked' : ''}
+                value={lengthList.filter(item => item === lth)}
+                onChange={() => handleCheckboxChange(lth)}
+              />
+              <label className="modal-label">{lth + ' letter word'}</label>
+            </div>
+          ))}
+        </form>
+      </div>
       <p>(Enter a number betwen 1 and 20 and select the word sizes you want.)</p>
     </>
   );
