@@ -37,3 +37,12 @@ body {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 }
+.hiddensquares {
+  visibility: hidden;
+}
+.redsquares {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  color: white;
+}
