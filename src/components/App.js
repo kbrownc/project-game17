@@ -17,14 +17,17 @@ function App() {
 
   const test = () => {
     let testSquares = [];
+    let i = 4;
     let workSquare = {
-        letter: ' ',
-        location: '1 / 1', 
+        letter: '',
+        locationRow: i + ' / ' + (i+1), 
+        locationCol: i + ' / 5', 
     };
     testSquares.push(workSquare);
     workSquare = {
-        letter: ' ',
-        location: '1 / 1', 
+        letter: '',
+        locationRow: '7 / 8', 
+        locationCol: '8 / 8', 
     };
     testSquares.push(workSquare);
     setSquares(testSquares)
@@ -55,6 +58,9 @@ function App() {
       <div className="info-wrapper">
         <button className="restart" onClick={() => restart()}>
           Restart
+        </button>
+        <button className="restart" onClick={() => handleClick()}>
+          Done
         </button>
         <button className="restart" onClick={() => test()}>
           Test
