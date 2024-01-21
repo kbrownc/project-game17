@@ -7,6 +7,7 @@ const SelectNumber = ({
   setSelectNumber,
   wordLengths,
   setWordLengths,
+  setSquares,
 }) => {
   const lengthList = [2, 3, 4, 5];
 
@@ -26,8 +27,32 @@ const SelectNumber = ({
     setWordLengths(newWordLengths);
   }
 
-  const doneClicked = e => {
+  const saveClicked = e => {
     setSelectNumber(true);
+
+    // test code
+    let testSquares = [];
+    let i = 1;
+    let workSquare = {
+        letter: '',
+        locationRow: i + ' / ' + (i+1), 
+        locationCol: i + ' / 5', 
+    };
+    testSquares.push(workSquare);
+    workSquare = {
+        letter: '',
+        locationRow: i + ' / ' + (i+1), 
+        locationCol: (i+1) + ' / ' + (i+2),
+    };
+    testSquares.push(workSquare);
+    workSquare = {
+        letter: '',
+        locationRow: i + ' / ' + (i+1), 
+        locationCol: (i+2) + ' / ' + (i+3),
+    };
+    testSquares.push(workSquare);
+    setSquares(testSquares)
+
   };
 
   return (
@@ -42,8 +67,8 @@ const SelectNumber = ({
           maxLength="2"
           onChange={editInput}
         />
-        <button className="done" onClick={() => doneClicked()}>
-          Done
+        <button className="done" onClick={() => saveClicked()}>
+          Save
         </button>
       </div>
       <div>

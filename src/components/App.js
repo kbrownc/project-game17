@@ -5,36 +5,18 @@ import Board from './Board';
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
   const [numberSelected, setNumberSelected] = useState('');
-  const [squares, setSquares] = useState([])
+  const [squares, setSquares] = useState([]);
   const [wordLengths, setWordLengths] = useState([]);
 
   const restart = () => {
     setSelectNumber(false);
     setNumberSelected('');
     setWordLengths([]);
-    setSquares([])
-  };
-
-  const test = () => {
-    let testSquares = [];
-    let i = 4;
-    let workSquare = {
-        letter: '',
-        locationRow: i + ' / ' + (i+1), 
-        locationCol: i + ' / 5', 
-    };
-    testSquares.push(workSquare);
-    workSquare = {
-        letter: '',
-        locationRow: '7 / 8', 
-        locationCol: '8 / 8', 
-    };
-    testSquares.push(workSquare);
-    setSquares(testSquares)
+    setSquares([]);
   };
 
   const handleClick = () => {
-    console.log('handleClick');
+    console.log('handleClick',squares[0].letter,squares[1].letter,squares[2].letter);
   };
 
   return (
@@ -47,23 +29,19 @@ function App() {
           setSelectNumber={setSelectNumber}
           wordLengths={wordLengths}
           setWordLengths={setWordLengths}
+          setSquares={setSquares}
         />
       ) : (
-        <Board 
-          squares={squares} 
-          setSquares={setSquares} 
-          onClick={handleClick} 
-        />
+        <div>
+          <Board squares={squares} setSquares={setSquares} onClick={handleClick} />
+          <button className="restart" onClick={() => handleClick()}>
+            Done
+          </button>
+        </div>
       )}
       <div className="info-wrapper">
         <button className="restart" onClick={() => restart()}>
           Restart
-        </button>
-        <button className="restart" onClick={() => handleClick()}>
-          Done
-        </button>
-        <button className="restart" onClick={() => test()}>
-          Test
         </button>
         <div>
           {numberSelected} {wordLengths}
