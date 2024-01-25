@@ -7,6 +7,34 @@ function App() {
   const [numberSelected, setNumberSelected] = useState('');
   const [squares, setSquares] = useState([]);
   const [wordLengths, setWordLengths] = useState([]);
+  const [remainingAlphabet, setRemainingAlphabet] = useState([
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+  ]);
 
   const restart = () => {
     setSelectNumber(false);
@@ -16,7 +44,7 @@ function App() {
   };
 
   const handleClick = () => {
-    console.log('handleClick',squares[0].letter,squares[1].letter,squares[2].letter);
+    console.log('handleClick', squares[0].letter, squares[1].letter, squares[2].letter);
   };
 
   return (
@@ -29,6 +57,7 @@ function App() {
           setSelectNumber={setSelectNumber}
           wordLengths={wordLengths}
           setWordLengths={setWordLengths}
+          squares={squares}
           setSquares={setSquares}
         />
       ) : (
@@ -40,6 +69,7 @@ function App() {
         </div>
       )}
       <div className="info-wrapper">
+        <p>{remainingAlphabet}</p>
         <button className="restart" onClick={() => restart()}>
           Restart
         </button>
