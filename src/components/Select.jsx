@@ -9,8 +9,8 @@ const SelectNumber = ({
   squares,
   setSquares,
 }) => {
-  let countLetter = 0;
   const lengthList = [2, 3, 4, 5];
+
   const getRandonNumber = (start, end) => {
     let getRandom = Math.floor(Math.random() * end + start);
     while (getRandom > end) {
@@ -22,12 +22,11 @@ const SelectNumber = ({
   const loadCell = (x, y, workSquares) => {
     let newSquare = {}
     newSquare = {
-      letter: countLetter,
+      letter: '',
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
     }
     workSquares.push(newSquare);
-    countLetter++
     return workSquares;
   };
 
@@ -49,28 +48,28 @@ const SelectNumber = ({
 
   const saveClicked = () => {
     setSelectNumber(true);
-    let x = 1;
-    let y = 1;
+    let posY = 1;
+    let posX = 1;
     let alignment = 'row';
     //console.log('Random', getRandonNumber(2, 5));
     let workSquares = JSON.parse(JSON.stringify(squares));
-    workSquares = loadCell(x, y, workSquares);
-    x++;
 
     for (let i = 0; i < wordLengths.length; i++) {
-      console.log('Loop 1 - ',i,wordLengths.length)  
-      for (x=1; x < wordLengths[i] ; x++) { 
-        if (i === 1 && x === 1) {x = x + 1}
-        console.log('Loop 2 - ',x,y,wordLengths[i])               
-        workSquares = loadCell(x, y, workSquares);
+      for (let x = 1; x < wordLengths[i] ; x++) {             
+        workSquares = loadCell(posX, posY, workSquares);
+        if (alignment === 'row') {
+          posX++
+        } else {
+          posY++
+        }
       }
       if (alignment === 'row') {
         alignment = 'column';
       } else {
         alignment = 'row';
       }
-      y++
     }
+    workSquares = loadCell(posX, posY, workSquares);
     setSquares(workSquares);
   };
 
