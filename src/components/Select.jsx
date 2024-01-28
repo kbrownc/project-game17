@@ -10,6 +10,7 @@ const SelectNumber = ({
   setSquares,
 }) => {
   const lengthList = [2, 3, 4, 5];
+  let count = 1
 
   const getRandonNumber = (start, end) => {
     let getRandom = Math.floor(Math.random() * end + start);
@@ -22,11 +23,12 @@ const SelectNumber = ({
   const loadCell = (x, y, workSquares) => {
     let newSquare = {}
     newSquare = {
-      letter: '',
+      letter: count,
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
     }
     workSquares.push(newSquare);
+    count = count + 1
     return workSquares;
   };
 
@@ -51,7 +53,6 @@ const SelectNumber = ({
     let posY = 1;
     let posX = 1;
     let alignment = 'row';
-    //console.log('Random', getRandonNumber(2, 5));
     let workSquares = JSON.parse(JSON.stringify(squares));
 
     for (let i = 0; i < wordLengths.length; i++) {
@@ -61,6 +62,14 @@ const SelectNumber = ({
           posX++
         } else {
           posY++
+        }
+        console.log('Random', getRandonNumber(2, 5));
+        if (alignment === 'row' && x === 1 && wordLengths[i] > 3) {
+          console.log('***row',alignment,x,wordLengths[i])
+          posY--
+        } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3) {
+          console.log('***column',alignment,x,wordLengths[i])
+          posX--
         }
       }
       if (alignment === 'row') {
