@@ -63,13 +63,10 @@ const SelectNumber = ({
         } else {
           posY++
         }
-        console.log('Random', getRandonNumber(2, 5));
-        if (alignment === 'row' && x === 1 && wordLengths[i] > 3) {
-          console.log('***row',alignment,x,wordLengths[i])
-          posY--
-        } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3) {
-          console.log('***column',alignment,x,wordLengths[i])
-          posX--
+        if (alignment === 'row' && x === 1 && wordLengths[i] > 3 && i > 0) {
+          if (getRandonNumber(1, 2) === 1) {posY--}
+        } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3 && i > 0) {
+          if (getRandonNumber(1, 2) === 1) {posX--}
         }
       }
       if (alignment === 'row') {
