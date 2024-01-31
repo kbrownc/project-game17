@@ -10,7 +10,7 @@ const SelectNumber = ({
   setSquares,
 }) => {
   const lengthList = [2, 3, 4, 5];
-  let count = 1
+  let count = 1;
 
   const getRandonNumber = (start, end) => {
     let getRandom = Math.floor(Math.random() * end + start);
@@ -21,14 +21,14 @@ const SelectNumber = ({
   };
 
   const loadCell = (x, y, workSquares) => {
-    let newSquare = {}
+    let newSquare = {};
     newSquare = {
       letter: count,
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
-    }
+    };
     workSquares.push(newSquare);
-    count = count + 1
+    count = count + 1;
     return workSquares;
   };
 
@@ -48,25 +48,34 @@ const SelectNumber = ({
     setWordLengths(newWordLengths);
   }
 
-  const saveClicked = () => {
-    setSelectNumber(true);
+  const loadBoard = () => {
     let posY = 1;
     let posX = 1;
     let alignment = 'row';
     let workSquares = JSON.parse(JSON.stringify(squares));
-
     for (let i = 0; i < wordLengths.length; i++) {
-      for (let x = 1; x < wordLengths[i] ; x++) {             
+
+      if (alignment === "row" && (posX + wordLengths[i]) > 8) {
+        return workSquares
+      } else if (alignment === "column" && (posY + wordLengths[i]) > 8) {
+        return workSquares
+      }
+
+      for (let x = 1; x < wordLengths[i]; x++) {
         workSquares = loadCell(posX, posY, workSquares);
         if (alignment === 'row') {
-          posX++
+          posX++;
         } else {
-          posY++
+          posY++;
         }
         if (alignment === 'row' && x === 1 && wordLengths[i] > 3 && i > 0) {
-          if (getRandonNumber(1, 2) === 1) {posY--}
+          if (getRandonNumber(1, 2) === 1) {
+            posY--;
+          }
         } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3 && i > 0) {
-          if (getRandonNumber(1, 2) === 1) {posX--}
+          if (getRandonNumber(1, 2) === 1) {
+            posX--;
+          }
         }
       }
       if (alignment === 'row') {
@@ -74,8 +83,22 @@ const SelectNumber = ({
       } else {
         alignment = 'row';
       }
+
+      console.log('i,alignment,posX,posY,wordLengths[0],wordLengths.length',i,alignment,posX,posY,wordLengths[i],wordLengths.length)
+      if (alignment === "row" && (posX + wordLengths[0]) < 9 && i+1 === wordLengths.length) {
+        i = 0
+      } else if (alignment === "column" && (posY + wordLengths[0]) < 9  && i+1 === wordLengths.length) {
+        i = 0
+      }
+
     }
     workSquares = loadCell(posX, posY, workSquares);
+    return workSquares;
+  };
+
+  const saveClicked = () => {
+    setSelectNumber(true);
+    let workSquares = loadBoard();
     setSquares(workSquares);
   };
 
