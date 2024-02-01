@@ -54,13 +54,11 @@ const SelectNumber = ({
     let alignment = 'row';
     let workSquares = JSON.parse(JSON.stringify(squares));
     for (let i = 0; i < wordLengths.length; i++) {
-
-      if (alignment === "row" && (posX + wordLengths[i]) > 8) {
-        return workSquares
-      } else if (alignment === "column" && (posY + wordLengths[i]) > 8) {
-        return workSquares
+      if (alignment === "row" && (posX + wordLengths[i]) > 9) {
+        break
+      } else if (alignment === "column" && (posY + wordLengths[i]) > 9) {
+        break
       }
-
       for (let x = 1; x < wordLengths[i]; x++) {
         workSquares = loadCell(posX, posY, workSquares);
         if (alignment === 'row') {
@@ -83,12 +81,10 @@ const SelectNumber = ({
       } else {
         alignment = 'row';
       }
-
-      console.log('i,alignment,posX,posY,wordLengths[0],wordLengths.length',i,alignment,posX,posY,wordLengths[i],wordLengths.length)
       if (alignment === "row" && (posX + wordLengths[0]) < 9 && i+1 === wordLengths.length) {
-        i = 0
+        i = -1
       } else if (alignment === "column" && (posY + wordLengths[0]) < 9  && i+1 === wordLengths.length) {
-        i = 0
+        i = -1
       }
 
     }
