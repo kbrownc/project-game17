@@ -8,9 +8,10 @@ const SelectNumber = ({
   setWordLengths,
   squares,
   setSquares,
+  wordNo,
+  setWordNo,
 }) => {
   const lengthList = [2, 3, 4, 5];
-  let count = 1;
 
   const getRandonNumber = (start, end) => {
     let getRandom = Math.floor(Math.random() * end + start);
@@ -20,15 +21,20 @@ const SelectNumber = ({
     return getRandom;
   };
 
-  const loadCell = (x, y, workSquares) => {
+  const loadCell = (x, y, workSquares,doubleWord,workWordNo) => {
     let newSquare = {};
+    let wordNums = [workWordNo]
+    if (doubleWord) {
+      wordNums = [workWordNo,workWordNo-1]
+    }
     newSquare = {
-      letter: count,
+      letter: wordNums,
+      // letter: '',
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
+      wordNums: wordNums,
     };
     workSquares.push(newSquare);
-    count = count + 1;
     return workSquares;
   };
 
@@ -50,6 +56,7 @@ const SelectNumber = ({
 
   const loadBoard = () => {
     let posY = 1;
+    let workWordNo = wordNo;
     let posX = 1;
     let alignment = 'row';
     let workSquares = JSON.parse(JSON.stringify(squares));
@@ -60,7 +67,11 @@ const SelectNumber = ({
         break
       }
       for (let x = 1; x < wordLengths[i]; x++) {
-        workSquares = loadCell(posX, posY, workSquares);
+        let doubleWord = false;
+        if ((x === 1 && i !== 0) || (x === 1 && posX !== 1)){
+          doubleWord = true;
+        }
+        workSquares = loadCell(posX, posY, workSquares,doubleWord,workWordNo);
         if (alignment === 'row') {
           posX++;
         } else {
@@ -86,9 +97,12 @@ const SelectNumber = ({
       } else if (alignment === "column" && (posY + wordLengths[0]) < 9  && i+1 === wordLengths.length) {
         i = -1
       }
-
+      workWordNo++
     }
-    workSquares = loadCell(posX, posY, workSquares);
+    workWordNo--
+    let doubleWord = false;
+    workSquares = loadCell(posX, posY, workSquares,doubleWord,workWordNo);
+    setWordNo(workWordNo)
     return workSquares;
   };
 

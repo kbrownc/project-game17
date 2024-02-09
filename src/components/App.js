@@ -4,6 +4,7 @@ import Board from './Board';
 
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
+  const [wordNo, setWordNo] = useState(1);
   const [numberSelected, setNumberSelected] = useState('');
   const [squares, setSquares] = useState([]);
   const [wordLengths, setWordLengths] = useState([]);
@@ -41,10 +42,31 @@ function App() {
     setNumberSelected('');
     setWordLengths([]);
     setSquares([]);
+    console.clear();
   };
 
   const handleClick = () => {
-    console.log('handleClick', squares[0].letter, squares[1].letter, squares[2].letter);
+    // which squares contain 1,2,3,.....
+    let wordN;
+    for (let i = 1; i < wordNo + 1; i++) {
+      wordN = []
+      for (let j = 0; j < squares.length; j++) {
+        wordN = squares.filter(event => {
+          if (event.wordNums.length === 1) {
+            if (event.wordNums[0] === i) {
+              return true;
+            }
+          } else if (event.wordNums.length === 2) {
+            if (event.wordNums[0] === i || event.wordNums[1] === i) {
+              return true;
+            }
+          } else {
+            return false;
+          }
+        });
+      }
+      console.log('wordN', i, wordN);
+    }
   };
 
   return (
@@ -59,6 +81,8 @@ function App() {
           setWordLengths={setWordLengths}
           squares={squares}
           setSquares={setSquares}
+          wordNo={wordNo}
+          setWordNo={setWordNo}
         />
       ) : (
         <div>
