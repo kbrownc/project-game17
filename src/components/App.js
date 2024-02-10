@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SelectNumber from './Select';
 import Board from './Board';
+import { alphabet } from '../letters/Alphabet';
 
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
@@ -8,40 +9,14 @@ function App() {
   const [numberSelected, setNumberSelected] = useState('');
   const [squares, setSquares] = useState([]);
   const [wordLengths, setWordLengths] = useState([]);
-  const [remainingAlphabet, setRemainingAlphabet] = useState([
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'I',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'O',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-  ]);
+  const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
 
   const restart = () => {
     setSelectNumber(false);
     setNumberSelected('');
     setWordLengths([]);
     setSquares([]);
+    setWordNo(1);
     console.clear();
   };
 
@@ -65,7 +40,7 @@ function App() {
           }
         });
       }
-      console.log('wordN', i, wordN);
+      //console.log('wordN', i, wordN);
     }
   };
 
