@@ -14,11 +14,11 @@ const SelectNumber = ({
   const lengthList = [2, 3, 4, 5];
 
   const getRandonNumber = (start, end) => {
-    let getRandom = Math.floor(Math.random() * end + start);
-    while (getRandom > end) {
-      getRandom = Math.floor(Math.random() * end + start);
+    let random = Math.floor(Math.random() * end + start);
+    while (random > end) {
+      random = Math.floor(Math.random() * end + start);
     }
-    return getRandom;
+    return random;
   };
 
   const loadCell = (x, y, workSquares,doubleWord,workWordNo) => {
@@ -59,6 +59,7 @@ const SelectNumber = ({
     let workWordNo = wordNo;
     let posX = 1;
     let alignment = 'row';
+    let randomNumber
     let workSquares = JSON.parse(JSON.stringify(squares));
     // outer loop runs through selected word lengths
     for (let i = 0; i < wordLengths.length; i++) {
@@ -69,12 +70,17 @@ const SelectNumber = ({
         break
       }
       // inner loop processes each letter in a word
+      //  1st see if next word is going to be offset from end of last word
+      randomNumber = getRandonNumber(1, 2)
+      let doubleWord = false;
       for (let x = 1; x < wordLengths[i]; x++) {
         // check if letter is used in 2 words
-        let doubleWord = false;
-        if ((x === 1 && i !== 0) || (x === 1 && posX !== 1)){
-          doubleWord = true;
-        }
+          if ((x === 1 && i !== 0) || (x === 1 && posX !== 1)){
+            doubleWord = true;
+          } else {
+            doubleWord = false;
+          }
+
         workSquares = loadCell(posX, posY, workSquares,doubleWord,workWordNo);
         if (alignment === 'row') {
           posX++;
@@ -82,12 +88,13 @@ const SelectNumber = ({
           posY++;
         }
         // randomly adjust if you build the next word on the current word's last or 2nd last letter
+        //      row/1st letter of new word is last letter of previous/ 4 or 5 letter word/not 1st word
         if (alignment === 'row' && x === 1 && wordLengths[i] > 3 && i > 0) {
-          if (getRandonNumber(1, 2) === 1) {
+          if (randomNumber === 1) {
             posY--;
           }
         } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3 && i > 0) {
-          if (getRandonNumber(1, 2) === 1) {
+          if (randomNumber === 1) {
             posX--;
           }
         }
