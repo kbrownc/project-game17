@@ -23,6 +23,8 @@ function App() {
   const handleClick = () => {
     // which squares contain 1,2,3,.....
     let wordN;
+    let result = '';
+    let result1 = '';
     for (let i = 1; i < wordNo + 1; i++) {
       wordN = []
       for (let j = 0; j < squares.length; j++) {
@@ -40,8 +42,15 @@ function App() {
           }
         });
       }
-      //console.log('wordN', i, wordN);
+
+      // temp cpde
+      result1 = '';
+      for (let k = 0; k < wordN.length; k++) {
+        result1 = result1 + wordN[k].letter
+      }
+      result = result + ' ' + result1
     }
+    console.log(result);
   };
 
   return (
