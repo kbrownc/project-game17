@@ -38,6 +38,16 @@ const SelectNumber = ({
     return workSquares;
   };
 
+  const switchCell = (workSquares) => {
+    let savedLetter = workSquares[workSquares.length - 2].letter
+    let savedWordNums = workSquares[workSquares.length - 2].wordNums
+    workSquares[workSquares.length - 2].letter = workSquares[workSquares.length - 1].letter
+    workSquares[workSquares.length - 2].wordNums = workSquares[workSquares.length - 1].wordNums
+    workSquares[workSquares.length - 1].letter = savedLetter
+    workSquares[workSquares.length - 1].wordNums = savedWordNums
+    return workSquares;
+  };
+
   const editInput = e => {
     const value = e.target.value.replace(/[^0-9]/gi, '');
     if (value > 20) return;
@@ -92,10 +102,12 @@ const SelectNumber = ({
         if (alignment === 'row' && x === 1 && wordLengths[i] > 3 && i > 0) {
           if (randomNumber === 1) {
             posY--;
+            workSquares = switchCell(workSquares);
           }
         } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3 && i > 0) {
           if (randomNumber === 1) {
             posX--;
+            workSquares = switchCell(workSquares);
           }
         }
       }
