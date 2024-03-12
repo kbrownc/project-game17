@@ -21,7 +21,7 @@ function App() {
   };
 
   const handleClick = () => {
-    // which squares contain 1,2,3,.....
+    // which squares contain 1s,2s,3s,.....
     let wordN;
     let result = '';
     let result1 = '';

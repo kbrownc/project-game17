@@ -1,4 +1,5 @@
 import React from 'react';
+import { testBoard } from '../letters/Testboard';
 
 const SelectNumber = ({
   numberSelected,
@@ -12,6 +13,7 @@ const SelectNumber = ({
   setWordNo,
 }) => {
   const lengthList = [2, 3, 4, 5];
+  let useTestBoard = true;
 
   const getRandonNumber = (start, end) => {
     let random = Math.floor(Math.random() * end + start);
@@ -28,8 +30,8 @@ const SelectNumber = ({
       wordNums = [workWordNo,workWordNo-1]
     }
     newSquare = {
-      letter: wordNums,
-      // letter: '',
+      //letter: wordNums,
+      letter: '',
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
       wordNums: wordNums,
@@ -136,6 +138,11 @@ const SelectNumber = ({
   const saveClicked = () => {
     setSelectNumber(true);
     let workSquares = loadBoard();
+    // temp code
+    if (useTestBoard) {
+      workSquares = JSON.parse(JSON.stringify(testBoard));
+      //console.log(workSquares)
+    }
     setSquares(workSquares);
   };
 
