@@ -10,6 +10,7 @@ function App() {
   const [squares, setSquares] = useState([]);
   const [wordLengths, setWordLengths] = useState([]);
   const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const restart = () => {
     setSelectNumber(false);
@@ -17,6 +18,7 @@ function App() {
     setWordLengths([]);
     setSquares([]);
     setWordNo(1);
+    setErrorMessage('')
     console.clear();
   };
 
@@ -42,7 +44,6 @@ function App() {
           }
         });
       }
-
       // temp cpde
       result1 = '';
       for (let k = 0; k < wordN.length; k++) {
@@ -51,11 +52,19 @@ function App() {
       result = result + ' ' + result1
     }
     console.log(result);
+
+    // final solution
+    //
+    // 1) verify each word is a valid word else display invalie word with err msg
+    //
+    // 2) calculate score if all words are valid
+    //
   };
 
   return (
     <>
       <h1>Game17</h1>
+      <p>{errorMessage}</p>
       {!selectNumber ? (
         <SelectNumber
           numberSelected={numberSelected}
@@ -70,7 +79,9 @@ function App() {
         />
       ) : (
         <div>
-          <Board squares={squares} setSquares={setSquares} onClick={handleClick} />
+          <Board squares={squares} setSquares={setSquares} onClick={handleClick} 
+            remainingAlphabet={remainingAlphabet} setRemainingAlphabet={setRemainingAlphabet}
+            errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
           <button className="restart" onClick={() => handleClick()}>
             Done
           </button>
