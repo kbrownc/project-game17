@@ -9,12 +9,13 @@ const Board = ({
   setRemainingAlphabet,
   errorMessage,
   setErrorMessage,
+  numberSelected,
 }) => {
   return (
     <div className="board">
       {squares.map((square, i) => (
         <Square
-          key={i}
+          key={i} 
           i={i}
           squares={squares}
           setSquares={setSquares}
@@ -23,6 +24,7 @@ const Board = ({
           setRemainingAlphabet={setRemainingAlphabet}
           errorMessage={errorMessage} 
           setErrorMessage={setErrorMessage}
+          numberSelected={numberSelected}
         />
       ))}
     </div>

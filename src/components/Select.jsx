@@ -13,7 +13,7 @@ const SelectNumber = ({
   setWordNo,
 }) => {
   const lengthList = [2, 3, 4, 5];
-  let useTestBoard = true;
+  let useTestBoard = false;
 
   const getRandonNumber = (start, end) => {
     let random = Math.floor(Math.random() * end + start);
@@ -136,12 +136,11 @@ const SelectNumber = ({
   };
 
   const saveClicked = () => {
-    setSelectNumber(true);
+    setSelectNumber(true); 
     let workSquares = loadBoard();
-    // temp code
+    // code to load test board
     if (useTestBoard) {
       workSquares = JSON.parse(JSON.stringify(testBoard));
-      //console.log(workSquares)
     }
     setSquares(workSquares);
   };

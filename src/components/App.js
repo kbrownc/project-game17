@@ -12,7 +12,7 @@ function App() {
   const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const restart = () => {
+  const restart = () => { 
     setSelectNumber(false);
     setNumberSelected('');
     setWordLengths([]);
@@ -81,7 +81,9 @@ function App() {
         <div>
           <Board squares={squares} setSquares={setSquares} onClick={handleClick} 
             remainingAlphabet={remainingAlphabet} setRemainingAlphabet={setRemainingAlphabet}
-            errorMessage={errorMessage} setErrorMessage={setErrorMessage} />
+            errorMessage={errorMessage} setErrorMessage={setErrorMessage} numberSelected={numberSelected}
+             />
+            }
           <button className="restart" onClick={() => handleClick()}>
             Done
           </button>
