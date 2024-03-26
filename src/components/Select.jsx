@@ -3,7 +3,7 @@ import { testBoard } from '../letters/Testboard';
 
 const SelectNumber = ({
   numberSelected,
-  setNumberSelected,
+  setNumberSelected, 
   setSelectNumber,
   wordLengths,
   setWordLengths,
@@ -13,7 +13,7 @@ const SelectNumber = ({
   setWordNo,
 }) => {
   const lengthList = [2, 3, 4, 5];
-  let useTestBoard = false;
+  let useTestBoard = true;
 
   const getRandonNumber = (start, end) => {
     let random = Math.floor(Math.random() * end + start);

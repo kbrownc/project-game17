@@ -12,13 +12,13 @@ function App() {
   const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const restart = () => { 
+  const restart = () => {
     setSelectNumber(false);
     setNumberSelected('');
     setWordLengths([]);
     setSquares([]);
     setWordNo(1);
-    setErrorMessage('')
+    setErrorMessage('');
     console.clear();
   };
 
@@ -28,28 +28,32 @@ function App() {
     let result = '';
     let result1 = '';
     for (let i = 1; i < wordNo + 1; i++) {
-      wordN = []
+      wordN = [];
       for (let j = 0; j < squares.length; j++) {
         wordN = squares.filter(event => {
           if (event.wordNums.length === 1) {
             if (event.wordNums[0] === i) {
               return true;
+            } else {
+              return false
             }
           } else if (event.wordNums.length === 2) {
             if (event.wordNums[0] === i || event.wordNums[1] === i) {
               return true;
+            } else {
+              return false
             }
           } else {
-            return false;
+            return false; 
           }
         });
       }
       // temp cpde
       result1 = '';
       for (let k = 0; k < wordN.length; k++) {
-        result1 = result1 + wordN[k].letter
+        result1 = result1 + wordN[k].letter;
       }
-      result = result + ' ' + result1
+      result = result + ' ' + result1;
     }
     console.log(result);
 
@@ -79,11 +83,17 @@ function App() {
         />
       ) : (
         <div>
-          <Board squares={squares} setSquares={setSquares} onClick={handleClick} 
-            remainingAlphabet={remainingAlphabet} setRemainingAlphabet={setRemainingAlphabet}
-            errorMessage={errorMessage} setErrorMessage={setErrorMessage} numberSelected={numberSelected}
-             />
-            }
+          <Board
+            squares={squares}
+            setSquares={setSquares}
+            onClick={handleClick}
+            remainingAlphabet={remainingAlphabet}
+            setRemainingAlphabet={setRemainingAlphabet}
+            errorMessage={errorMessage}
+            setErrorMessage={setErrorMessage}
+            numberSelected={numberSelected}
+          />
+          }
           <button className="restart" onClick={() => handleClick()}>
             Done
           </button>

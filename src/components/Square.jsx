@@ -9,7 +9,7 @@ const Square = ({
   setRemainingAlphabet,
   errorMessage,
   setErrorMessage,
-  numberSelected,
+  numberSelected, 
 }) => {
   const editInput = e => {
     const newSquares = JSON.parse(JSON.stringify(squares));
