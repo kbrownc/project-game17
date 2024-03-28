@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import SelectNumber from './Select';
 import Board from './Board';
 import { alphabet } from '../letters/Alphabet';
+import { wordDictionary2 } from '../letters/WordDictionary2';
+import { wordDictionary3 } from '../letters/WordDictionary3';
+import { wordDictionary4 } from '../letters/WordDictionary4';
+import { wordDictionary5 } from '../letters/WordDictionary5';
+import { letterPoints } from '../letters/LetterPoints';
 
 function App() {
   const [selectNumber, setSelectNumber] = useState(false);
@@ -11,6 +16,7 @@ function App() {
   const [wordLengths, setWordLengths] = useState([]);
   const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
   const [errorMessage, setErrorMessage] = useState('');
+  const [score, setScore] = useState(0);
 
   const restart = () => {
     setSelectNumber(false);
@@ -26,7 +32,7 @@ function App() {
     // which squares contain 1s,2s,3s,.....
     let wordN;
     let result = '';
-    let result1 = '';
+    let words = [];
     for (let i = 1; i < wordNo + 1; i++) {
       wordN = [];
       for (let j = 0; j < squares.length; j++) {
@@ -35,35 +41,97 @@ function App() {
             if (event.wordNums[0] === i) {
               return true;
             } else {
-              return false
+              return false;
             }
           } else if (event.wordNums.length === 2) {
             if (event.wordNums[0] === i || event.wordNums[1] === i) {
               return true;
             } else {
-              return false
+              return false;
             }
           } else {
-            return false; 
+            return false;
           }
         });
       }
-      // temp cpde
-      result1 = '';
+      // combine words from board
+      result = ''
       for (let k = 0; k < wordN.length; k++) {
-        result1 = result1 + wordN[k].letter;
+        result = result + wordN[k].letter;
       }
-      result = result + ' ' + result1;
+      words.push(result);
     }
-    console.log(result);
-
-    // final solution
-    //
-    // 1) verify each word is a valid word else display invalie word with err msg
-    //
-    // 2) calculate score if all words are valid
-    //
+    verifyBoard(words);
   };
+
+  // Calculate total value of words
+  function calculateScore(words) {
+    let workScore = 0;
+    for (let i = 0; i < words.length; i++) {
+      for (let j = 0; j < words[i].length; j++) {
+        workScore = workScore + letterPoints.find(item => {
+              return item.letter === words[i][j].toUpperCase();
+            }).point;
+      }
+    }
+    return workScore;
+  }
+
+  function verifyBoard(words) {
+    let workErrorMessage = '';
+    // Are all squares filled in?
+    for (let j = 0; j < squares.length; j++) {
+      if (squares[j].letter === '') {
+        workErrorMessage = 'Fill in all squares';
+        setErrorMessage(workErrorMessage);
+        return;
+      }
+    }
+    // are all words real words
+    let allValid = true;
+    let invalidWord = '';
+    for (let j = 0; j < squares.length; j++) {
+      if (validWord(words[j]) === false) {
+        allValid = false;
+        invalidWord = words[j];
+        break;
+      }
+    }
+
+    // temp
+    allValid = true;
+
+    if (!allValid) {
+      workErrorMessage = invalidWord + ' word is not valid';
+    } else {
+      workErrorMessage = 'Valid words';
+      setScore(calculateScore(words));
+    }
+    setErrorMessage(workErrorMessage);
+  }
+
+  function validWord(word) {
+    let wordDictionary = []
+    if (word.length === 2) {
+      wordDictionary = wordDictionary2
+    } else if (word.length === 3) {
+      wordDictionary = wordDictionary3
+    } else if (word.length === 3) {
+      wordDictionary = wordDictionary4
+    } else if (word.length === 4) {
+      wordDictionary = wordDictionary4
+    } else {
+      wordDictionary = wordDictionary5
+    }
+    const found = wordDictionary.find(item => {
+      return item === word.toLowerCase();
+    });
+    if (found === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   return (
     <>
@@ -105,7 +173,7 @@ function App() {
           Restart
         </button>
         <div>
-          {numberSelected} {wordLengths}
+          Number Selected: {numberSelected} Word lengths selected: {wordLengths} Score: {score}
         </div>
       </div>
     </>

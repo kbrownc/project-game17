@@ -13,7 +13,7 @@ const SelectNumber = ({
   setWordNo,
 }) => {
   const lengthList = [2, 3, 4, 5];
-  let useTestBoard = true;
+  let useTestBoard = false;
 
   const getRandonNumber = (start, end) => {
     let random = Math.floor(Math.random() * end + start);
@@ -30,7 +30,6 @@ const SelectNumber = ({
       wordNums = [workWordNo,workWordNo-1]
     }
     newSquare = {
-      //letter: wordNums,
       letter: '',
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),

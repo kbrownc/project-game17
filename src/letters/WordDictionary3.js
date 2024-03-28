@@ -1,4 +1,4 @@
-let wordDictionary = [
+let wordDictionary3 = [
   "aah",
   "aal",
   "aas",
@@ -1069,4 +1069,4 @@ let wordDictionary = [
   "zzz",
 ];
 
-export { wordDictionary };
+export { wordDictionary3 };

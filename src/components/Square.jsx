@@ -17,7 +17,6 @@ const Square = ({
     let newLetter = e.target.value.replace(/[^a-z]/gi, '').toUpperCase();
 
     let workErrorMessage = '';
-    console.log(numberSelected,32,remainingAlphabet.length - 1)
     if ((numberSelected < 32 - remainingAlphabet.length + 1) &&
       ['A', 'E', 'I', 'O', 'U'].indexOf(newLetter) === -1) {
       workRemainingAlphabet.push('');
