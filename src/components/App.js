@@ -25,7 +25,7 @@ function App() {
     setSquares([]);
     setWordNo(1);
     setErrorMessage('');
-    setRemainingAlphabet(alphabet)
+    setRemainingAlphabet(alphabet);
     console.clear();
   };
 
@@ -56,7 +56,7 @@ function App() {
         });
       }
       // combine words from board
-      result = ''
+      result = '';
       for (let k = 0; k < wordN.length; k++) {
         result = result + wordN[k].letter;
       }
@@ -70,9 +70,11 @@ function App() {
     let workScore = 0;
     for (let i = 0; i < words.length; i++) {
       for (let j = 0; j < words[i].length; j++) {
-        workScore = workScore + letterPoints.find(item => {
-              return item.letter === words[i][j].toUpperCase();
-            }).point;
+        workScore =
+          workScore +
+          letterPoints.find(item => {
+            return item.letter === words[i][j].toUpperCase();
+          }).point;
       }
     }
     return workScore;
@@ -112,17 +114,17 @@ function App() {
   }
 
   function validWord(word) {
-    let wordDictionary = []
+    let wordDictionary = [];
     if (word.length === 2) {
-      wordDictionary = wordDictionary2
+      wordDictionary = wordDictionary2;
     } else if (word.length === 3) {
-      wordDictionary = wordDictionary3
+      wordDictionary = wordDictionary3;
     } else if (word.length === 3) {
-      wordDictionary = wordDictionary4
+      wordDictionary = wordDictionary4;
     } else if (word.length === 4) {
-      wordDictionary = wordDictionary4
+      wordDictionary = wordDictionary4;
     } else {
-      wordDictionary = wordDictionary5
+      wordDictionary = wordDictionary5;
     }
     const found = wordDictionary.find(item => {
       return item === word.toLowerCase();
@@ -169,7 +171,9 @@ function App() {
         </div>
       )}
       <div className="info-wrapper">
-        <p>{remainingAlphabet}</p>
+        <p>
+          {remainingAlphabet} Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}
+        </p>
         <button className="restart" onClick={() => restart()}>
           Restart
         </button>
