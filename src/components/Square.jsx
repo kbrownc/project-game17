@@ -9,7 +9,7 @@ const Square = ({
   setRemainingAlphabet,
   errorMessage,
   setErrorMessage,
-  numberSelected, 
+  numberSelected,
 }) => {
   const editInput = e => {
     const newSquares = JSON.parse(JSON.stringify(squares));
@@ -17,8 +17,10 @@ const Square = ({
     let newLetter = e.target.value.replace(/[^a-z]/gi, '').toUpperCase();
 
     let workErrorMessage = '';
-    if ((numberSelected < 32 - remainingAlphabet.length + 1) &&
-      ['A', 'E', 'I', 'O', 'U'].indexOf(newLetter) === -1) {
+    if (
+      numberSelected < 32 - remainingAlphabet.length + 1 &&
+      ['A', 'E', 'I', 'O', 'U'].indexOf(newLetter) === -1
+    ) {
       workRemainingAlphabet.push('');
       workErrorMessage = 'You have reached the extent of your letter useage... please mark game DONE';
       newLetter = '';
@@ -39,7 +41,11 @@ const Square = ({
     }
     setErrorMessage(workErrorMessage);
     // Add letter to available list if removed
-    if (newSquares[i].letter !== '' && e.target.value === '') {
+    if (
+      newSquares[i].letter !== '' &&
+      e.target.value === '' &&
+      ['A', 'E', 'I', 'O', 'U'].indexOf(newSquares[i].letter) === -1
+    ) {
       workRemainingAlphabet.push(newSquares[i].letter);
     }
     // if letter entered was not '' and was not a vowel, remove it from alphabet list

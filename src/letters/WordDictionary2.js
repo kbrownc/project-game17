@@ -6,6 +6,9 @@ let wordDictionary2 = [
   "me",
   "no",
   "pa",
+  "to",
+  "da",
+  "ta",
 ];
 
 export { wordDictionary2 };

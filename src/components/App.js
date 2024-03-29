@@ -25,6 +25,7 @@ function App() {
     setSquares([]);
     setWordNo(1);
     setErrorMessage('');
+    setRemainingAlphabet(alphabet)
     console.clear();
   };
 
@@ -90,7 +91,7 @@ function App() {
     // are all words real words
     let allValid = true;
     let invalidWord = '';
-    for (let j = 0; j < squares.length; j++) {
+    for (let j = 0; j < words.length; j++) {
       if (validWord(words[j]) === false) {
         allValid = false;
         invalidWord = words[j];
@@ -98,8 +99,8 @@ function App() {
       }
     }
 
-    // temp
-    allValid = true;
+    // temp code for testing
+    //allValid = true;
 
     if (!allValid) {
       workErrorMessage = invalidWord + ' word is not valid';
