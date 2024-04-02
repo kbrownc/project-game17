@@ -165,21 +165,15 @@ function App() {
             numberSelected={numberSelected}
           />
           }
-          <button className="restart" onClick={() => handleClick()}>
-            Done
-          </button>
+          <button className="restart" onClick={() => handleClick()}>Done</button>
         </div>
       )}
       <div className="info-wrapper">
-        <p>
-          {remainingAlphabet} Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}
-        </p>
-        <button className="restart" onClick={() => restart()}>
-          Restart
-        </button>
-        <div>
-          Number Selected: {numberSelected} Word lengths selected: {wordLengths} Score: {score}
-        </div>
+        <p>{remainingAlphabet} </p>
+        <p>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</p>
+        <p>Word lengths selected: {wordLengths}</p>
+        <p>Score: {score}</p>
+        <button className="restart" onClick={() => restart()}>Restart</button>
       </div>
     </>
   );
