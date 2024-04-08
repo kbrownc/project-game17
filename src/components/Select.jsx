@@ -3,7 +3,7 @@ import { testBoard } from '../letters/Testboard';
 
 const SelectNumber = ({
   numberSelected,
-  setNumberSelected, 
+  setNumberSelected,
   setSelectNumber,
   wordLengths,
   setWordLengths,
@@ -23,11 +23,11 @@ const SelectNumber = ({
     return random;
   };
 
-  const loadCell = (x, y, workSquares,doubleWord,workWordNo) => {
+  const loadCell = (x, y, workSquares, doubleWord, workWordNo) => {
     let newSquare = {};
-    let wordNums = [workWordNo]
+    let wordNums = [workWordNo];
     if (doubleWord) {
-      wordNums = [workWordNo,workWordNo-1]
+      wordNums = [workWordNo, workWordNo - 1];
     }
     newSquare = {
       letter: '',
@@ -39,13 +39,13 @@ const SelectNumber = ({
     return workSquares;
   };
 
-  const switchCell = (workSquares) => {
-    let savedLetter = workSquares[workSquares.length - 2].letter
-    let savedWordNums = workSquares[workSquares.length - 2].wordNums
-    workSquares[workSquares.length - 2].letter = workSquares[workSquares.length - 1].letter
-    workSquares[workSquares.length - 2].wordNums = workSquares[workSquares.length - 1].wordNums
-    workSquares[workSquares.length - 1].letter = savedLetter
-    workSquares[workSquares.length - 1].wordNums = savedWordNums
+  const switchCell = workSquares => {
+    let savedLetter = workSquares[workSquares.length - 2].letter;
+    let savedWordNums = workSquares[workSquares.length - 2].wordNums;
+    workSquares[workSquares.length - 2].letter = workSquares[workSquares.length - 1].letter;
+    workSquares[workSquares.length - 2].wordNums = workSquares[workSquares.length - 1].wordNums;
+    workSquares[workSquares.length - 1].letter = savedLetter;
+    workSquares[workSquares.length - 1].wordNums = savedWordNums;
     return workSquares;
   };
 
@@ -70,29 +70,27 @@ const SelectNumber = ({
     let workWordNo = wordNo;
     let posX = 1;
     let alignment = 'row';
-    let randomNumber
+    let randomNumber;
     let workSquares = JSON.parse(JSON.stringify(squares));
     // outer loop runs through selected word lengths
     for (let i = 0; i < wordLengths.length; i++) {
       // check to see if you have made the largest board possible yet
-      if (alignment === "row" && (posX + wordLengths[i]) > 9) {
-        break
-      } else if (alignment === "column" && (posY + wordLengths[i]) > 9) {
-        break
+      if (alignment === 'row' && posX + wordLengths[i] > 9) {
+        break;
+      } else if (alignment === 'column' && posY + wordLengths[i] > 9) {
+        break;
       }
       // inner loop processes each letter in a word
-      //  1st see if next word is going to be offset from end of last word
-      randomNumber = getRandonNumber(1, 2)
+      randomNumber = getRandonNumber(1, 2);
       let doubleWord = false;
       for (let x = 1; x < wordLengths[i]; x++) {
         // check if letter is used in 2 words
-          if ((x === 1 && i !== 0) || (x === 1 && posX !== 1)){
-            doubleWord = true;
-          } else {
-            doubleWord = false;
-          }
-
-        workSquares = loadCell(posX, posY, workSquares,doubleWord,workWordNo);
+        if ((x === 1 && i !== 0) || (x === 1 && posX !== 1)) {
+          doubleWord = true;
+        } else {
+          doubleWord = false;
+        }
+        workSquares = loadCell(posX, posY, workSquares, doubleWord, workWordNo);
         if (alignment === 'row') {
           posX++;
         } else {
@@ -100,12 +98,12 @@ const SelectNumber = ({
         }
         // randomly adjust if you build the next word on the current word's last or 2nd last letter
         //      row/1st letter of new word is last letter of previous/ 4 or 5 letter word/not 1st word
-        if (alignment === 'row' && x === 1 && wordLengths[i] > 3 && i > 0) {
+        if (alignment === 'row' && x === 1 && wordLengths[i - 1] > 2 && i > 0) {
           if (randomNumber === 1) {
             posY--;
             workSquares = switchCell(workSquares);
           }
-        } else if (alignment === 'column' && x === 1 && wordLengths[i] > 3 && i > 0) {
+        } else if (alignment === 'column' && x === 1 && wordLengths[i - 1] > 2 && i > 0) {
           if (randomNumber === 1) {
             posX--;
             workSquares = switchCell(workSquares);
@@ -119,25 +117,26 @@ const SelectNumber = ({
         alignment = 'row';
       }
       // if room still exists for another word, start processing word lengths at the beginning
-      if (alignment === "row" && (posX + wordLengths[0]) < 9 && i+1 === wordLengths.length) {
-        i = -1
-      } else if (alignment === "column" && (posY + wordLengths[0]) < 9  && i+1 === wordLengths.length) {
-        i = -1
+      if (alignment === 'row' && posX + wordLengths[0] < 9 && i + 1 === wordLengths.length) {
+        i = -1;
+      } else if (alignment === 'column' && posY + wordLengths[0] < 9 && i + 1 === wordLengths.length) {
+        i = -1;
       }
       // increment word counter
-      workWordNo++
+      workWordNo++;
     }
-    workWordNo--
+    workWordNo--;
     let doubleWord = false;
-    workSquares = loadCell(posX, posY, workSquares,doubleWord,workWordNo);
-    setWordNo(workWordNo)
+    workSquares = loadCell(posX, posY, workSquares, doubleWord, workWordNo);
+    setWordNo(workWordNo);
     return workSquares;
   };
 
   const saveClicked = () => {
-    setSelectNumber(true); 
+    setSelectNumber(true);
     let workSquares = loadBoard();
-    // code to load test board
+
+    // code to load a test board
     if (useTestBoard) {
       workSquares = JSON.parse(JSON.stringify(testBoard));
     }
