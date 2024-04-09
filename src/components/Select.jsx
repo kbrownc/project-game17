@@ -135,7 +135,6 @@ const SelectNumber = ({
   const saveClicked = () => {
     setSelectNumber(true);
     let workSquares = loadBoard();
-
     // code to load a test board
     if (useTestBoard) {
       workSquares = JSON.parse(JSON.stringify(testBoard));

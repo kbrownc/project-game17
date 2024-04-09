@@ -4,9 +4,6 @@ import Board from './Board';
 import { alphabet } from '../letters/Alphabet';
 import { wordDictionary2 } from '../letters/WordDictionary2';
 import { wordDictionary3 } from '../letters/WordDictionary3';
-
-//import { wordDictionary4 } from '../letters/temp4';
-
 import { wordDictionary4 } from '../letters/WordDictionary4';
 import { wordDictionary5 } from '../letters/WordDictionary5';
 import { letterPoints } from '../letters/LetterPoints';

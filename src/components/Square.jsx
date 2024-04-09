@@ -28,8 +28,7 @@ const Square = ({
     setErrorMessage(workErrorMessage);
 
     // Ensure input is a letter and if it is save it
-    //newLetter = e.target.value.replace(/[^a-z]/gi, '').toUpperCase();
-    // ensure letter is available. If not generate ab error message
+    // Ensure letter is available. If not generate ab error message
     if (
       workRemainingAlphabet.indexOf(e.target.value.toUpperCase()) === -1 &&
       e.target.value !== '' &&
