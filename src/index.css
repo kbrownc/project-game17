@@ -40,9 +40,22 @@ body {
 .hiddensquares {
   visibility: hidden;
 }
-.redsquares {
-  background-color: red;
+.yellowsquares {
+  background-color: yellow;
+  font-weight: bold;
+  font-size: 20px;
   width: 20px;
   height: 20px;
-  color: white;
+  color: black;
+}
+.info-wrapper {
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+}
+.info-parms {
+  background-color: pink;
+}
+.score {
+  text-align: right;
 }

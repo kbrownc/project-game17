@@ -134,8 +134,9 @@ function App() {
 
   return (
     <>
-      <h1>Game17</h1>
+      <h1>Dyna-crosswords</h1>
       <p>{errorMessage}</p>
+      <p className="score">Score: {score}</p>
       {!selectNumber ? (
         <SelectNumber
           numberSelected={numberSelected}
@@ -161,15 +162,23 @@ function App() {
             numberSelected={numberSelected}
           />
           }
-          <button className="restart" onClick={() => handleClick()}>Done</button>
+          <button className="restart" onClick={() => handleClick()}>
+            Done
+          </button>
         </div>
       )}
       <div className="info-wrapper">
         <p>{remainingAlphabet} </p>
-        <p>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</p>
-        <p>Word lengths selected: {wordLengths}</p>
-        <p>Score: {score}</p>
-        <button className="restart" onClick={() => restart()}>Restart</button>
+        <p className="info-parms">
+          <p>
+            Word lengths selected:
+            {wordLengths.map((lth, i) => lth + ' ')}
+          </p>
+          <p>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</p>
+        </p>
+        <button className="restart" onClick={() => restart()}>
+          Restart
+        </button>
       </div>
     </>
   );

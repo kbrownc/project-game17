@@ -144,6 +144,10 @@ const SelectNumber = ({
 
   return (
     <>
+    <p>
+    Instructions: Enter a number betwen 1 and 20<br/>
+    which limits the number of consonents you can play. <br/>
+    Select the word sizes you want.<br/></p>
       <div className="inputdev">
         <input
           required
@@ -175,7 +179,6 @@ const SelectNumber = ({
           ))}
         </form>
       </div>
-      <p>(Enter a number betwen 1 and 20 and select the word sizes you want.)</p>
     </>
   );
 };

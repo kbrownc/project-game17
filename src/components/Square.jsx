@@ -65,7 +65,7 @@ const Square = ({
       <input
         required
         name="cell+square"
-        className="redsquares"
+        className="yellowsquares"
         type="text"
         value={squares[i].letter}
         maxLength="1"
