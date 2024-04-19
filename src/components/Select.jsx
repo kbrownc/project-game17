@@ -31,6 +31,7 @@ const SelectNumber = ({
     }
     newSquare = {
       letter: '',
+      //letter: wordNums,
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
       wordNums: wordNums,
@@ -62,6 +63,7 @@ const SelectNumber = ({
     } else {
       newWordLengths.push(lth);
     }
+    //     include if want to sort by default   newWordLengths.sort((a,b) => a - b)
     setWordLengths(newWordLengths);
   }
 
@@ -98,12 +100,12 @@ const SelectNumber = ({
         }
         // randomly adjust if you build the next word on the current word's last or 2nd last letter
         //      row/1st letter of new word is last letter of previous/ 4 or 5 letter word/not 1st word
-        if (alignment === 'row' && x === 1 && wordLengths[i - 1] > 2 && i > 0) {
+        if (alignment === 'row' && x === 1 && wordLengths[i - 1] > 2 && i > 0 && wordLengths[i] !== 2) {
           if (randomNumber === 1) {
             posY--;
             workSquares = switchCell(workSquares);
           }
-        } else if (alignment === 'column' && x === 1 && wordLengths[i - 1] > 2 && i > 0) {
+        } else if (alignment === 'column' && x === 1 && wordLengths[i - 1] > 2 && i > 0 && wordLengths[i] !== 2) {
           if (randomNumber === 1) {
             posX--;
             workSquares = switchCell(workSquares);
@@ -140,6 +142,7 @@ const SelectNumber = ({
       workSquares = JSON.parse(JSON.stringify(testBoard));
     }
     setSquares(workSquares);
+    console.log(workSquares)
   };
 
   return (
