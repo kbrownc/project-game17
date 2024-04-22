@@ -63,7 +63,6 @@ const SelectNumber = ({
     } else {
       newWordLengths.push(lth);
     }
-    //     include if want to sort by default   newWordLengths.sort((a,b) => a - b)
     setWordLengths(newWordLengths);
   }
 
@@ -142,15 +141,14 @@ const SelectNumber = ({
       workSquares = JSON.parse(JSON.stringify(testBoard));
     }
     setSquares(workSquares);
-    console.log(workSquares)
   };
 
   return (
     <>
     <p>
-    Instructions: Enter a number betwen 1 and 20<br/>
-    which limits the number of consonents you can play. <br/>
-    Select the word sizes you want.<br/></p>
+    Instructions: Enter a number betwen 1 and 20 which<br/>
+    limits the number of consonents you can play. Select<br/>
+    the word sizes you want the board to be composed of.<br/></p>
       <div className="inputdev">
         <input
           required

@@ -65,9 +65,9 @@ function App() {
     verifyBoard(words);
   };
 
-  // Calculate total value of words
+  // Calculate total value of words plus Bonus
   function calculateScore(words) {
-    let workScore = 0;
+    let workScore = 20 - numberSelected;
     for (let i = 0; i < words.length; i++) {
       for (let j = 0; j < words[i].length; j++) {
         workScore =
@@ -169,13 +169,13 @@ function App() {
       )}
       <div className="info-wrapper">
         <p>{remainingAlphabet} </p>
-        <p className="info-parms">
-          <p>
+        <div className="info-parms">
+          <div>
             Word lengths selected:
             {wordLengths.map((lth, i) => lth + ' ')}
-          </p>
-          <p>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</p>
-        </p>
+          </div>
+          <div>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</div>
+        </div>
         <button className="restart" onClick={() => restart()}>
           Restart
         </button>
