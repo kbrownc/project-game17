@@ -26,6 +26,7 @@ function App() {
     setWordNo(1);
     setErrorMessage('');
     setRemainingAlphabet(alphabet);
+    setScore(0);
     console.clear();
   };
 
@@ -134,21 +135,24 @@ function App() {
 
   return (
     <>
-      <h1>Dyna-crosswords</h1>
-      <p>{errorMessage}</p>
-      <p className="score">Score: {score}</p>
+      <h1 className="game-title">Dyna-crosswords</h1>
+      <div className="msg">{errorMessage}</div>
+      <span className="score"> Score: {score}</span>
       {!selectNumber ? (
-        <SelectNumber
-          numberSelected={numberSelected}
-          setNumberSelected={setNumberSelected}
-          setSelectNumber={setSelectNumber}
-          wordLengths={wordLengths}
-          setWordLengths={setWordLengths}
-          squares={squares}
-          setSquares={setSquares}
-          wordNo={wordNo}
-          setWordNo={setWordNo}
-        />
+        <div>
+          <SelectNumber
+            numberSelected={numberSelected}
+            setNumberSelected={setNumberSelected}
+            setSelectNumber={setSelectNumber}
+            wordLengths={wordLengths}
+            setWordLengths={setWordLengths}
+            squares={squares}
+            setSquares={setSquares}
+            wordNo={wordNo}
+            setWordNo={setWordNo}
+            setErrorMessage={setErrorMessage}
+          />
+        </div>
       ) : (
         <div>
           <Board
@@ -161,14 +165,13 @@ function App() {
             setErrorMessage={setErrorMessage}
             numberSelected={numberSelected}
           />
-          }
           <button className="restart" onClick={() => handleClick()}>
             Done
           </button>
         </div>
       )}
       <div className="info-wrapper">
-        <p>{remainingAlphabet} </p>
+        <p className="alphabet">{remainingAlphabet} </p>
         <div className="info-parms">
           <div>
             Word lengths selected:
@@ -176,6 +179,7 @@ function App() {
           </div>
           <div>Number of Letters remaining: {numberSelected - (32 - remainingAlphabet.length)}</div>
         </div>
+        <br />
         <button className="restart" onClick={() => restart()}>
           Restart
         </button>

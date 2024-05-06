@@ -11,6 +11,7 @@ const SelectNumber = ({
   setSquares,
   wordNo,
   setWordNo,
+  setErrorMessage,
 }) => {
   const lengthList = [2, 3, 4, 5];
   let useTestBoard = false;
@@ -53,6 +54,9 @@ const SelectNumber = ({
   const editInput = e => {
     const value = e.target.value.replace(/[^0-9]/gi, '');
     if (value > 20) return;
+    if (value === '0') {
+      setErrorMessage('Warning....number of letters selected is 0');
+    }
     setNumberSelected(value);
   };
 
@@ -104,7 +108,13 @@ const SelectNumber = ({
             posY--;
             workSquares = switchCell(workSquares);
           }
-        } else if (alignment === 'column' && x === 1 && wordLengths[i - 1] > 2 && i > 0 && wordLengths[i] !== 2) {
+        } else if (
+          alignment === 'column' &&
+          x === 1 &&
+          wordLengths[i - 1] > 2 &&
+          i > 0 &&
+          wordLengths[i] !== 2
+        ) {
           if (randomNumber === 1) {
             posX--;
             workSquares = switchCell(workSquares);
@@ -134,6 +144,15 @@ const SelectNumber = ({
   };
 
   const saveClicked = () => {
+    if (numberSelected === '') {
+      setErrorMessage('Number of letters  not selected');
+      return;
+    }
+    if (wordLengths.length === 0) {
+      setErrorMessage('Lengths of words  not selected');
+      return;
+    }
+    setErrorMessage('');
     setSelectNumber(true);
     let workSquares = loadBoard();
     // code to load a test board
@@ -145,10 +164,15 @@ const SelectNumber = ({
 
   return (
     <>
-    <p>
-    Instructions: Enter a number betwen 1 and 20 which<br/>
-    limits the number of consonents you can play. Select<br/>
-    the word sizes you want the board to be composed of.<br/></p>
+      <div className="instructions">
+        Instructions: Enter a number betwen 1 and 20 which
+        <br />
+        limits the number of consonents you can play. Select
+        <br />
+        the word sizes you want the board to be composed of.
+        <br />
+      </div>
+      <br />
       <div className="inputdev">
         <input
           required
@@ -159,9 +183,7 @@ const SelectNumber = ({
           maxLength="2"
           onChange={editInput}
         />
-        <button className="done" onClick={() => saveClicked()}>
-          Save
-        </button>
+        <span className="instructionsNum">Enter number here</span>
       </div>
       <div>
         <form>
@@ -175,11 +197,14 @@ const SelectNumber = ({
                 value={lengthList.filter(item => item === lth)}
                 onChange={() => handleCheckboxChange(lth)}
               />
-              <label className="modal-label">{lth + ' letter word'}</label>
+              <label className="modal-label">{lth + ' letter word size'}</label>
             </div>
           ))}
         </form>
       </div>
+      <button className="done" onClick={() => saveClicked()}>
+          Save choices
+        </button>
     </>
   );
 };

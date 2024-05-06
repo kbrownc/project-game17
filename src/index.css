@@ -13,6 +13,12 @@ body {
   background-color: red;
   border: none;
 }
+.game-title {
+  color: darkblue;
+  text-shadow: #FC0 1px 0 10px;
+  text-align: left;
+
+}
 .inputdev {
   display: flex;
    border: black;
@@ -27,6 +33,7 @@ body {
 }
 .selected {
   display: flex;
+  border: black solid;
   width: 25px;
   height: 20px;
   color: black;
@@ -58,5 +65,29 @@ body {
   border: solid;
 }
 .score {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  font-weight: bold;
+}
+.msg {
+  color: red;
+  font-weight: bold;
+  background-color: white;
+}
+.alphabet {
+  color: black;
+  font-weight: bold;
+  background-color: yellow;
+}
+.instructions {
+  all: unset;
+  display: block;
+  color: blue;
+  background-color: yellow;
+}
+.instructionsNum {
+  color: blue;
+  font-weight: bold;
+  background-color: lightgrey;
 }
