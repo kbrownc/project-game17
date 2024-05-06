@@ -17,6 +17,7 @@ function App() {
   const [remainingAlphabet, setRemainingAlphabet] = useState(alphabet);
   const [errorMessage, setErrorMessage] = useState('');
   const [score, setScore] = useState(0);
+  const [allValid, setAllValid] = useState(false);
 
   const restart = () => {
     setSelectNumber(false);
@@ -92,22 +93,23 @@ function App() {
       }
     }
     // are all words real words
-    let allValid = true;
+    let workAllValid = true;
     let invalidWord = '';
     for (let j = 0; j < words.length; j++) {
       if (validWord(words[j]) === false) {
-        allValid = false;
+        workAllValid = false;
         invalidWord = words[j];
         break;
       }
     }
-    if (!allValid) {
-      workErrorMessage = invalidWord + ' word is not valid';
+    if (!workAllValid) {
+      workErrorMessage = invalidWord + ' is not valid';
     } else {
-      workErrorMessage = 'Valid words';
+      workErrorMessage = 'You win!!!';
       setScore(calculateScore(words));
     }
     setErrorMessage(workErrorMessage);
+    setAllValid(workAllValid)
   }
 
   function validWord(word) {
@@ -136,8 +138,8 @@ function App() {
   return (
     <>
       <h1 className="game-title">Dyna-crosswords</h1>
-      <div className="msg">{errorMessage}</div>
       <span className="score"> Score: {score}</span>
+      <div className={(allValid) ? "msgValid" : "msgErr"}>{errorMessage}</div>
       {!selectNumber ? (
         <div>
           <SelectNumber
