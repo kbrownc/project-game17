@@ -16,7 +16,7 @@ const SelectNumber = ({
   const lengthList = [2, 3, 4, 5];
   let useTestBoard = false;
 
-  const getRandonNumber = (start, end) => {
+  const getRandomNumber = (start, end) => {
     let random = Math.floor(Math.random() * end + start);
     while (random > end) {
       random = Math.floor(Math.random() * end + start);
@@ -85,7 +85,7 @@ const SelectNumber = ({
         break;
       }
       // inner loop processes each letter in a word
-      randomNumber = getRandonNumber(1, 2);
+      randomNumber = getRandomNumber(1, 2);
       let doubleWord = false;
       for (let x = 1; x < wordLengths[i]; x++) {
         // check if letter is used in 2 words
