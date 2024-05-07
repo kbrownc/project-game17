@@ -15,18 +15,17 @@ const Square = ({
     const newSquares = JSON.parse(JSON.stringify(squares));
     const workRemainingAlphabet = JSON.parse(JSON.stringify(remainingAlphabet));
     let newLetter = e.target.value.replace(/[^a-z]/gi, '').toUpperCase();
-
+    // Check to see if you have reached the extent of your letter useage
     let workErrorMessage = '';
     if (
       numberSelected < 32 - remainingAlphabet.length + 1 &&
       ['A', 'E', 'I', 'O', 'U'].indexOf(newLetter) === -1
     ) {
       workRemainingAlphabet.push('');
-      workErrorMessage = 'You have reached the extent of your letter useage... please mark game DONE';
+      workErrorMessage = 'You have reached the extent of your letter useage... please start over';
       newLetter = '';
     }
     setErrorMessage(workErrorMessage);
-
     // Ensure input is a letter and if it is save it
     // Ensure letter is available. If not generate ab error message
     if (
@@ -53,7 +52,6 @@ const Square = ({
         workRemainingAlphabet.splice(workRemainingAlphabet.indexOf(newLetter), 1);
       }
     }
-
     // save state
     newSquares[i].letter = newLetter;
     setSquares(newSquares);

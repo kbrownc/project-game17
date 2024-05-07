@@ -32,7 +32,6 @@ const SelectNumber = ({
     }
     newSquare = {
       letter: '',
-      //letter: wordNums,
       locationCol: x + ' / ' + (x + 1),
       locationRow: y + ' / ' + (y + 1),
       wordNums: wordNums,

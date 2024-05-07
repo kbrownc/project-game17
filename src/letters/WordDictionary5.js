@@ -2845,6 +2845,7 @@
     "tiger",
     "tight",
     "tiles",
+    "timid",
     "timer",
     "times",
     "tired",
