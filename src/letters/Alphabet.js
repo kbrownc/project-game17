@@ -1,6 +1,6 @@
 const alphabet = [ 
     'A',
-    'E'.
+    'E',
     'I',
     'O',
     'U',
