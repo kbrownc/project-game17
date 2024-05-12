@@ -1,9 +1,4 @@
 const alphabet = [ 
-    'A',
-    'E',
-    'I',
-    'O',
-    'U',
     'B',
     'C',
     'C',
