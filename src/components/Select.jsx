@@ -159,6 +159,7 @@ const SelectNumber = ({
       workSquares = JSON.parse(JSON.stringify(testBoard));
     }
     setSquares(workSquares);
+    debugger;
   };
 
   return (
