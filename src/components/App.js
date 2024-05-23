@@ -84,9 +84,8 @@ function App() {
     verifyBoard(words);
   };
 
-  function checkWords() {
+  const checkWords = () => {
     let allValid = true;
-    //let invalidWord = '';
     for (let j = 0; j < words.length; j++) {
       if (validWord(words[j]) === false) {
         allValid = false;
